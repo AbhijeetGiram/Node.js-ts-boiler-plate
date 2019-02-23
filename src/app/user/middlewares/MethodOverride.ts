@@ -1,8 +1,8 @@
-import express = require('express');
-import methodOverride = require('method-override');
-import bodyParser = require('body-parser');
-import compression = require('compression');
-import cors = require('cors');
+import express from 'express';
+import methodOverride from 'method-override';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import cors from 'cors';
 
 export class MethodOverride {
     static configuration(): any {
