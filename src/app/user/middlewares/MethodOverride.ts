@@ -4,7 +4,7 @@ import bodyParser = require('body-parser');
 import compression = require('compression');
 import cors = require('cors');
 
-class MethodOverride {
+export class MethodOverride {
     static configuration(): any {
         const app = express();
         app.use(methodOverride('X-HTTP-Method'));
@@ -23,7 +23,3 @@ class MethodOverride {
         return app;
     }
 }
-
-export = MethodOverride;
-
-

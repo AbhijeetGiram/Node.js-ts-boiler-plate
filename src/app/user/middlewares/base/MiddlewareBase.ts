@@ -1,8 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import MethodOverride from './../MethodOverride';
-import BaseRoutes from './../../routes/base/BaseRoutes';
+import {MethodOverride} from './../MethodOverride';
+import {BaseRoutes} from './../../routes/base/BaseRoutes';
 
 export class MiddlewareBase {
     static get configuration() {

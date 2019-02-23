@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 // const userModel = mongoose.model('myusers');
 
-export default class UserController {
+export class UserController {
 
     read(req: express.Request, res: express.Response, next: express.NextFunction) {
         try {
