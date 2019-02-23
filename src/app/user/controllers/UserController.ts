@@ -14,8 +14,9 @@ export class UserController {
 
     read(req: express.Request, res: express.Response, next: express.NextFunction) {
         try {
-            console.log('read req', req);
-            this.userService.read((error, result) => {
+            let userService = new UserService();
+            // console.log('read req', req);
+            userService.read((error, result) => {
                 if (error) {
                     next(error);
                 } else {
