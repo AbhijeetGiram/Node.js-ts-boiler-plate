@@ -15,7 +15,7 @@ app.all('*', (req: any, res: any, next: any) => {
 
 app.use(MiddlewareBase.configuration);
 
-let port = 3006;
+let port = 3001;
 var mongooseInstance: any;
 var mongooseConnection: mongoose.Connection;
 const server = http.createServer(app);
@@ -34,5 +34,6 @@ server.listen(port, () => {
         let host = '127.0.0.1';
         let name = 'mytest';
         mongoose.set('debug',true);
-        this.mongooseInstance = mongoose.connect('mongodb://' + host + '/' + name+'');
+        this.mongooseInstance = mongoose.connect('mongodb://' + host + '/' + name+'', 
+        { useNewUrlParser: true });
 });
