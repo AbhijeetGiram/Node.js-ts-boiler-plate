@@ -1,15 +1,15 @@
-import mongoose from 'mongoose';
+//import mongoose from 'mongoose';
 import DataAccess from '../dataaccess';
-// import {Schema} from 'mongoose';
+ import {Schema} from 'mongoose';
 import {User} from './../mongoose/User'
 // import {UserModel} from './../model/UserModel';
 
-// let mongoose = DataAccess.mongooseInstance;
-// let mongooseConnection = DataAccess.mongooseConnection;
+ let mongoose = DataAccess.mongooseInstance;
+ let mongooseConnection = DataAccess.mongooseConnection;
 
 export class UserSchema {
     static get schema() {
-        let schema = new mongoose.Schema({
+        let schema = new Schema({
             name: {
                 type: String
             },
@@ -21,5 +21,6 @@ export class UserSchema {
     }
 }
 
-let schema = mongoose.model<User>('myusers', UserSchema.schema);
+let schema = mongoose.model('myusers', UserSchema.schema);
+
 module.exports = schema;

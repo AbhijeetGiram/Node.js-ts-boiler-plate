@@ -16,11 +16,11 @@ class DataAccess {
         });
 
         // let host = config.get('application.database.host');
-        let host = '127.0.0.1';
-        let name = 'mytest';
+        let host = 'localhost';
+        let name = 'test';
         mongoose.set('debug', true);
         //this.mongooseInstance = mongoose.connect('mongodb://admin:buildinfoadmin123@' + host + '/' + name + '');
-        this.mongooseInstance = mongoose.connect('mongodb://' + host + '/' + name + '');
+        this.mongooseInstance = mongoose.createConnection ('mongodb://' + host + '/' + name + '');
         return this.mongooseInstance;
     }
 }
