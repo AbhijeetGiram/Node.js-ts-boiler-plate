@@ -1,10 +1,9 @@
-import express from 'express';
-import path from 'path';
-import http from 'http';
-import mongoose from 'mongoose';
-import {MiddlewareBase} from './app/user/middlewares/base/MiddlewareBase';
+import express = require("express");
+import MiddlewareBase = require('./app/user/middlewares/base/MiddlewareBase');
+import BaseRoutes = require('./app/user/routes/base/BaseRoutes');
 
 const app = express();
+app.set("port", process.env.PORT || 8080);
 
 app.all('*', (req: any, res: any, next: any) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -14,26 +13,10 @@ app.all('*', (req: any, res: any, next: any) => {
 });
 
 app.use(MiddlewareBase.configuration);
+app.use(new BaseRoutes().routes);
 
-let port = 3001;
-var mongooseInstance: any;
-var mongooseConnection: mongoose.Connection;
-const server = http.createServer(app);
-server.listen(port, () => {
-    console.log('App is listening on port:' + port);
-
-
-        console.log('Trying to connected to mongodb.');
-        if (this.mongooseInstance) return this.mongooseInstance;
-
-        this.mongooseConnection = mongoose.connection;
-        this.mongooseConnection.once('open', () => {
-            console.log('Connected to mongodb.');
-        });
-
-        let host = '127.0.0.1';
-        let name = 'mytest';
-        mongoose.set('debug',true);
-        this.mongooseInstance = mongoose.connect('mongodb://' + host + '/' + name+'', 
-        { useNewUrlParser: true });
+app.listen(app.get("port"), () => {
+    console.log("server started at http://localhost:" + app.get("port"));
 });
+
+module.exports = app;

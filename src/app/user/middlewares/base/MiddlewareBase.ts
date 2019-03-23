@@ -1,16 +1,18 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+import bodyParser = require("body-parser");
+import express = require("express");
 
-import {MethodOverride} from './../MethodOverride';
-import {BaseRoutes} from './../../routes/base/BaseRoutes';
+import BaseRoutes = require("./../../routes/base/BaseRoutes");
+import MethodOverride = require("./../MethodOverride");
 
-export class MiddlewareBase {
+class MiddlewaresBase {
+
     static get configuration() {
-        const app = express();
-        app.use(bodyParser.json({limit: '50mb'}));
-        app.use(MethodOverride.configuration());
-        app.use(new BaseRoutes().routes);
+         const app = express();
+         app.use(bodyParser.json({limit: "50mb"}));
+         app.use(MethodOverride.configuration());
 
-        return app;
+         return app;
     }
 }
+Object.seal(MiddlewaresBase);
+export = MiddlewaresBase;

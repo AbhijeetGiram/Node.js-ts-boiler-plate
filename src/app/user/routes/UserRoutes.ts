@@ -1,9 +1,9 @@
-import express from 'express';
-import {UserController} from './../controllers/UserController';
+import express = require("express");
+import UserController = require("../controllers/UserController");
 
 const router = express.Router();
 
-export class UserRoutes {
+class UserRoutes {
 
     private userController: UserController;
 
@@ -13,10 +13,14 @@ export class UserRoutes {
 
     get routes(): express.Router {
         let controller = this.userController;
-
-        router.get('/', controller.read);
-        router.post('/', controller.write);
+        
+        router.post('/', controller.create);
+        router.get('/', controller.retrieve);
 
         return router;
     }
 }
+
+
+Object.seal(UserRoutes);
+export = UserRoutes;

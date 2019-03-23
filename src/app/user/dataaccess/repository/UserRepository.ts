@@ -1,15 +1,15 @@
-import {RepositoryBase} from './base/repository.base';
-import dataAccess  from './../dataaccess';
-import {UserSchema} from './../schema/UserSchema';
-import {User} from './../mongoose/User';
-import mongoose from 'mongoose';
-//const userModel = mongoose.model('myusers');
-const userModel : any = UserSchema;
+import UserSchema = require("../schema/UserSchema");
+import User = require("./../mongoose/user");
 
-export class UserRepository extends RepositoryBase<User> {
+import RepositoryBase = require("./base/repository.base");
 
-    constructor(){
-        super(userModel);
-    }
+class UserRepository extends RepositoryBase<User> {
+
+  constructor() {
+    super(UserSchema);
+  }
 
 }
+
+Object.seal(UserRepository);
+export = UserRepository;

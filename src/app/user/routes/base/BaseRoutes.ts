@@ -1,12 +1,14 @@
-import express from 'express';
-import {UserRoutes} from './../UserRoutes';
+import * as express from "express";
+import UserRoutes = require("./../UserRoutes");
 
 const app = express();
 
-export class BaseRoutes {
+class BaseRoutes {
     get routes() {
         app.use('/api/users/', new UserRoutes().routes);
 
         return app;
     }
 }
+
+export = BaseRoutes;

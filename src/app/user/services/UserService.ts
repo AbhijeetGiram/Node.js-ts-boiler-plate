@@ -1,6 +1,7 @@
-import {UserRepository} from './../dataaccess/repository/UserRepository'
+import User = require("../dataaccess/mongoose/User");
+import UserRepository = require("../dataaccess/repository/UserRepository");
 
-export class UserService {
+class UserService {
 
     private userRepository: UserRepository;
 
@@ -8,27 +9,26 @@ export class UserService {
         this.userRepository = new UserRepository();
     }
 
-    read(callback: (error: any, result: any) =>  void) {
-        this.userRepository.retrieve('', (err, res) => {
-            if (err) {
-                callback(err, null);
+    public create(user: User, callback: (error: any, response: any) => void) {
+        this.userRepository.create(user, (error, result) => {
+            if (error) {
+                callback(error, null);
             } else {
-                callback(null, res);
+                callback(null, result);
             }
         });
     }
 
-    write(callback: (error: any, result: any) =>  void) {
-        let user = {
-            name: 'Abhijeet Giram',
-            id: 262
-        };
-        this.userRepository.create('', (err, res) => {
-            if (err) {
-                callback(err, null);
+    public retrieve(callback: (error: any, response: any) => void) {
+        this.userRepository.retrieve({}, (error, result) => {
+            if (error) {
+                callback(error, null);
             } else {
-                callback(null, res);
+                callback(null, result);
             }
         });
     }
 }
+
+Object.seal(UserService);
+export = UserService;

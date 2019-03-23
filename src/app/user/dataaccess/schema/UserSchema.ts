@@ -1,26 +1,27 @@
-//import mongoose from 'mongoose';
-import DataAccess from '../dataaccess';
- import {Schema} from 'mongoose';
-import {User} from './../mongoose/User'
-// import {UserModel} from './../model/UserModel';
+import {Schema} from "mongoose";
+import User = require("../mongoose/user");
+import DataAccess = require("./../dataaccess");
 
- let mongoose = DataAccess.mongooseInstance;
- let mongooseConnection = DataAccess.mongooseConnection;
+const mongoose = DataAccess.mongooseInstance;
+const mongooseConnection = DataAccess.mongooseConnection;
 
-export class UserSchema {
+class UserSchema {
     static get schema() {
-        let schema = new Schema({
-            name: {
-                type: String
+
+        const user = new Schema({
+                email: {
+                    type: String
+                },
+                name: {
+                    type: String
+                },
             },
-            roll_id: {
-                type: Number
-            }
-        });
-        return schema;
+            {
+                timestamps: true,
+                versionKey: false
+            });
+        return user;
     }
 }
-
-let schema = mongoose.model('myusers', UserSchema.schema);
-
-module.exports = schema;
+const userSchema = mongooseConnection.model<User>("User", UserSchema.schema);
+export = userSchema;

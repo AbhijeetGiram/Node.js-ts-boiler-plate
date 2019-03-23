@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
-import {UserModel} from './../model/UserModel';
+import * as mongoose from "mongoose";
+import userModel = require("./../model/UserModel");
 
-export interface User extends UserModel, mongoose.Document {
+interface User extends userModel, mongoose.Document {
     _id: string;
 }
+export = User;

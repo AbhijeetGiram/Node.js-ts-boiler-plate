@@ -1,31 +1,36 @@
-import mongoose from 'mongoose';
+import mongoose = require("mongoose");
+import IRead = require("./read");
+import IWrite = require("./write");
 
-export class RepositoryBase<T extends mongoose.Document> {
+class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
 
-    private schemaModel: mongoose.Model<mongoose.Document>;
+  private schemaModel: mongoose.Model<mongoose.Document>;
 
-    constructor(schemaModel: mongoose.Model<mongoose.Document>) {
-        this.schemaModel = schemaModel;
-    }
+  constructor(schemaModel: mongoose.Model<mongoose.Document>) {
+    this.schemaModel = schemaModel;
+  }
 
-    retrieve(field: any, callback: (error: any, result: any) => void) {
-        this.schemaModel.find(field, (error: any, result: any) => {
-            if (error) {
-                callback(error, null);
-            } else {
-                callback(null, result);
-            }
-        });
-    }
+  public create(item: T, callback: (error: any, result: any) => void) {
+    this.schemaModel.create(item, (error: Error, result: T) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, result);
+      }
+    });
 
-    create(item: any, callback:(error: any, result: any)=> void) {
-        this.schemaModel.create(item, (error: any, result: any) => {
-            if (error) {
-                callback(error, null);
-            } else {
-                callback(null, result);
-            }
-        });
-    }
-    
+  }
+
+  public retrieve(field: any, callback: (error: any, result: any) => void) {
+    this.schemaModel.find(field, (error: Error, result: T) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, result);
+      }
+    });
+  }
+
 }
+
+export = RepositoryBase;

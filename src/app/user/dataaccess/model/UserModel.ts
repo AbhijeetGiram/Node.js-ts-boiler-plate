@@ -1,4 +1,7 @@
-export class UserModel {
-    name: string;
-    roll_id: number;
+class UserModel {
+    public email: string;
+    public name: string;
+    constructor() {}
 }
+
+export = UserModel;
